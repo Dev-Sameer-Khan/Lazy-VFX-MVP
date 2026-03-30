@@ -44,7 +44,7 @@ const Features = () => {
   return (
     <section
       id="features"
-      className="w-full min-h-screen max-w-7xl mx-auto px-4 py-40 flex flex-col items-center"
+      className="w-full min-h-screen max-w-360 mx-auto px-4 py-40 flex flex-col items-center"
     >
      <h2 className="text-[2.8rem] md:text-7xl font-extrabold tracking-tight bg-gradient-to-br from-emerald-400 via-emerald-300 to-white bg-clip-text text-transparent drop-shadow-lg mb-6">
         Features

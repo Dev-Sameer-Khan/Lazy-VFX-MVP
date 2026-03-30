@@ -1,7 +1,7 @@
 import React from "react";
 import Terminal from "../components/UI/Terminal";
 import { Copy, Check } from 'lucide-react';
-
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const HowToUSe = () => {
@@ -177,12 +177,12 @@ function Experience() {
       <p className="mt-10 text-center text-lg text-white/60 leading-tight">
         That&apos;s it! Tweak the settings above to customize your effect. For
         deeper integration &amp; advanced usage, see the&nbsp;
-        <a
-          href="/documentation"
+        <Link
+          to={{pathname: "/docs"}}
           className="text-emerald-400 underline hover:opacity-80"
         >
           full documentation
-        </a>
+        </Link>
         .
       </p>
     </section>

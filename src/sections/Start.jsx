@@ -15,7 +15,7 @@ const Start = () => {
           Start building
         </span>
         <span className="text-emerald-500 font-semibold drop-shadow ml-2 italic">
-          effects
+          Today
         </span>
       </h1>
 
