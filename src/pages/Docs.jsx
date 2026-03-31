@@ -1,10 +1,12 @@
 import React from "react";
 import Navbar from "../components/layout/Navbar";
+import BG from "../components/layout/BG";
+import Cursor from "../components/layout/Cursor";
 
 const anchorLink = (href, label) => (
   <a
     href={href}
-    className="text-emerald-400 underline hover:text-emerald-300 transition-colors mx-1"
+    className="text-emerald-400 underline hover:text-emerald-300 transition-colors mx-1 hubot-sans"
     rel="noopener noreferrer"
     target={href.startsWith("http") ? "_blank" : undefined}
   >
@@ -15,10 +17,12 @@ const anchorLink = (href, label) => (
 const Docs = () => (
     <>
     <Navbar/>
-  <section className="w-full pt-40  bg-black text-white/90 leading-relaxed tracking-normal">
-    <div className="max-w-360 mx-auto">
-    <h1 className="text-[2.4rem] md:text-5xl font-extrabold  mb-2">
-      ☄️ <span className="bg-gradient-to-br from-emerald-400 via-emerald-300 to-white bg-clip-text text-transparent">Lazy VFX</span>
+  <section className="w-full overflow-hidden bg-black text-white/90 leading-relaxed tracking-normal">
+    {/* <Cursor/> */}
+    <BG/>
+    <div className="max-w-360 mx-auto relative pt-40 max-[599px]:px-6 max-[599px]:pt-16">
+    <h1 className="text-[2.4rem] md:text-5xl font-extrabold  mb-2 hubot-sans">
+      ☄️ Lazy <span className="bg-gradient-to-br from-emerald-400 via-emerald-300 to-white bg-clip-text text-transparent font-normal italic">VFX</span>
     </h1>
     <p className="italic mb-2 text-white/70">
       Effortless high-end visual effects for the modern web, built for React &amp; Three.js
@@ -26,8 +30,8 @@ const Docs = () => (
     <p className="mb-7">
       Lazy VFX is a minimal, shader-driven VFX engine designed for modern web apps using React and Three.js. It abstracts away all the math and plumbing for emitters, GPU-accelerated particles, and real-time shaders, so you can stay focused on building cinematic, interactive experiences.
     </p>
-    <div className="mb-6 flex flex-wrap gap-3">
-      {anchorLink("#", "Live demo")}
+    <div className="mb-6 flex flex-wrap gap-3 hubot-sans">
+      {anchorLink("/demo", "Live demo")}
       <span className="text-white/30">-</span>
       {anchorLink("#", "Fireworks demo")}
       <span className="text-white/30">-</span>
@@ -35,7 +39,7 @@ const Docs = () => (
     </div>
     <hr className="border-white/10 mb-8" />
 
-    <h2 className="text-2xl font-bold mb-4" id="features">
+    <h2 className="text-2xl font-bold mb-4 hubot-sans" id="features">
       ✨ Features
     </h2>
     <ul className="list-disc pl-6 mb-10 space-y-2 text-white/80">
@@ -57,11 +61,11 @@ const Docs = () => (
     </ul>
     <hr className="border-white/10 mb-8" />
 
-    <h2 className="text-2xl font-bold mb-4" id="install">
+    <h2 className="text-2xl font-bold mb-4 hubot-sans" id="install">
       🚀 Quick Install
     </h2>
     <p className="mb-3">Use your favorite package manager:</p>
-    <pre className="bg-[#181c1b] text-emerald-100 text-sm rounded-md py-4 px-4 overflow-x-auto mb-10">
+    <pre className="bg-[#181c1b] text-emerald-100 text-sm rounded-md py-4 px-4 overflow-x-auto mb-10 jetbrains-mono">
       <code>
         {[
           "# With pnpm",
@@ -77,7 +81,7 @@ const Docs = () => (
     </pre>
     <hr className="border-white/10 mb-8" />
 
-    <h2 className="text-2xl font-bold mb-4" id="usage">
+    <h2 className="text-2xl font-bold mb-4 hubot-sans" id="usage">
       🛠️ Usage Example
     </h2>
     <p className="mb-2">
@@ -91,12 +95,12 @@ const Docs = () => (
         <b className="font-semibold text-white">VFXEmitter:</b> Controls how and when particles are emitted into the scene
       </li>
     </ul>
-    <p className="mb-3">
+    <p className="mb-3 ">
       Add cinematic particles in seconds to any{" "}
       {anchorLink("https://docs.pmnd.rs/react-three-fiber", "React Three Fiber")}
       {" "}scene:
     </p>
-    <pre className="bg-[#181c1b] text-emerald-100 text-sm rounded-md py-4 px-4 overflow-x-auto mb-8">
+    <pre className="bg-[#181c1b] text-emerald-100 text-sm rounded-md py-4 px-4 overflow-x-auto mb-8 jetbrains-mono">
       <code>
 {`import { VFXParticals, VFXEmitter } from 'lazy-vfx';
 
@@ -163,13 +167,13 @@ function Experience() {
     </pre>
     <hr className="border-white/10 mb-8" />
 
-    <h2 className="text-2xl font-bold mb-4" id="custom-geometry">
+    <h2 className="text-2xl font-bold mb-4 hubot-sans" id="custom-geometry">
       Custom Geometry Example
     </h2>
     <p className="mb-3">
       You can use custom geometries for your particles:
     </p>
-    <pre className="bg-[#181c1b] text-emerald-100 text-sm rounded-md py-4 px-4 overflow-x-auto mb-8">
+    <pre className="bg-[#181c1b] text-emerald-100 text-sm rounded-md py-4 px-4 overflow-x-auto mb-8 jetbrains-mono">
       <code>
 {`import { useGLTF } from '@react-three/drei';
 
@@ -207,7 +211,7 @@ const CustomParticles = () => {
       If your model's node hierarchy is different, adjust <code className="bg-black/30 px-1 rounded">nodes.Sword.geometry</code> accordingly.
     </blockquote>
 
-    <h2 className="text-2xl font-bold mb-4" id="api">
+    <h2 className="text-2xl font-bold mb-4 hubot-sans" id="api">
       API Reference
     </h2>
     <h3 className="text-lg font-semibold mt-6 mb-2">VFXParticles Component</h3>
@@ -244,7 +248,7 @@ const CustomParticles = () => {
         </tbody>
       </table>
     </div>
-    <h4 className="font-semibold mb-2">VFXParticles Settings</h4>
+    <h4 className="font-semibold mb-2 hubot-sans">VFXParticles Settings</h4>
     <div className="overflow-x-auto mb-6">
       <table className="w-full text-white/90 text-xs border border-white/10 rounded mb-4">
         <thead>
@@ -332,7 +336,7 @@ const CustomParticles = () => {
       </table>
     </div>
 
-    <h3 className="text-lg font-semibold mt-8 mb-2">VFXEmitter Component</h3>
+    <h3 className="text-lg font-semibold mt-8 mb-2 hubot-sans">VFXEmitter Component</h3>
     <div className="overflow-x-auto mb-3">
       <table className="w-full text-white/90 text-sm border border-white/10 rounded mb-4">
         <thead>
@@ -371,7 +375,7 @@ const CustomParticles = () => {
         </tbody>
       </table>
     </div>
-    <h4 className="font-semibold mb-2">VFXEmitter Settings</h4>
+    <h4 className="font-semibold mb-2 hubot-sans">VFXEmitter Settings</h4>
     <div className="overflow-x-auto mb-8">
       <table className="w-full text-white/90 text-xs border border-white/10 rounded mb-4">
         <thead>
@@ -502,8 +506,8 @@ const CustomParticles = () => {
     </div>
 
     <hr className="border-white/10 mb-8" />
-    <h3 className="text-md font-semibold mt-4 mb-1">📄 License</h3>
-    <p className="mb-10">
+    <h3 className="text-md font-semibold mt-4 mb-1 max-[599px]:text-center">📄 License</h3>
+    <p className="mb-10 max-[599px]:text-center">
       MIT © {anchorLink("https://github.com/Dev-Sameer-Khan", "Dev-Sameerkhan")}
     </p>
     </div>

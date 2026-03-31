@@ -44,9 +44,9 @@ const Features = () => {
   return (
     <section
       id="features"
-      className="w-full min-h-screen max-w-360 mx-auto px-4 py-40 flex flex-col items-center"
+      className="w-full min-h-screen max-w-360 mx-auto px-4 py-40 max-[599px]:pb-10 max-[599px]:pt-20 flex flex-col items-center"
     >
-     <h2 className="text-[2.8rem] md:text-7xl font-extrabold tracking-tight bg-gradient-to-br from-emerald-400 via-emerald-300 to-white bg-clip-text text-transparent drop-shadow-lg mb-6">
+     <h2 className="text-[2.8rem] md:text-7xl hubot-sans font-extrabold tracking-tight bg-gradient-to-br from-emerald-400 via-emerald-300 to-white bg-clip-text text-transparent drop-shadow-lg mb-6">
         Features
       </h2>
       <p className="mb-8 text-center text-lg text-white/60 leading-tight max-w-3xl">
@@ -59,7 +59,7 @@ const Features = () => {
             className="bg-gradient-to-br from-white/5 to-white/0 border border-white/10 rounded-xl p-6 shadow-xl flex flex-col gap-2"
           >
             <div className="text-2xl mb-2">{feature.emoji}</div>
-            <div className="font-semibold text-lg text-white mb-1 drop-shadow">
+            <div className="font-semibold hubot-sans text-lg text-white mb-1 drop-shadow">
               {feature.title}
             </div>
             <div className="text-white/70 text-base font-normal">

@@ -21,13 +21,13 @@ export default function Terminal({title, copyText, terminal,width}) {
             <div className="w-3 h-3 rounded-full bg-yellow-500" />
             <div className="w-3 h-3 rounded-full bg-green-500" />
           </div>
-          <div className="mx-auto text-xs font-mono text-white/40">{title}</div>
+          <div className="mx-auto text-xs font-mono text-white/40 hubot-sans">{title}</div>
         </div>
         <div className="p-6 flex items-center justify-between font-mono text-sm md:text-base">
          <div className="flex items-center gap-4">
          {terminal && <span className="text-pink-500">~</span>}
          {terminal &&  <span className="text-white/60">$</span>}
-            <span className="text-white font-medium">{copyText}</span>
+            <span className="text-white font-medium jetbrains-mono">{copyText}</span>
           </div>
           <button 
             onClick={handleCopy}

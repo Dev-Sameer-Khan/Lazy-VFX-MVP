@@ -1,11 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @import "tailwindcss";
 
-::selection{
+
+::selection {
   background-color: #10B981;
-  color: white
-  ;
+  color: white;
 }
 
-html{
+html {
   scroll-behavior: smooth;
+}
+
+.hubot-sans {
+  font-family: "Hubot Sans", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 800 !important; 
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.inter {
+  font-family: "Inter", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 500 !important;
+  font-style: normal;
+}
+
+.jetbrains-mono {
+  font-family: "JetBrains Mono", monospace !important;
+  font-optical-sizing: auto;
+  font-weight: 400 !important;
+  font-style: normal;
+}
+
+body {
+  font-family: "Inter", sans-serif;
 }

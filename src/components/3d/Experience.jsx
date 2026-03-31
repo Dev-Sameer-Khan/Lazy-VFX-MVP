@@ -1,13 +1,14 @@
-import { Environment, OrbitControls } from '@react-three/drei'
+import { Environment, OrbitControls, Stats } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React from 'react'
 import Scene from './Scene'
 
-const Experience = () => {
+const Experience = ({debug, stats}) => {
   return (
     <Canvas>
         <ambientLight intensity={1} />
-        <Scene/>
+        {stats && <Stats/>}
+        <Scene debug={debug}/>
     </Canvas>
   )
 }

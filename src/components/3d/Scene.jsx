@@ -1,34 +1,79 @@
 import React from 'react'
-import VFXParticals from '../vfxs/VFXParticals'
-import VFXEmitter from '../vfxs/VFXEmitter'
-import { Sparkles } from '@react-three/drei'
+// import VFXParticals from '../vfxs/VFXParticals'
+// import VFXEmitter from '../vfxs/VFXEmitter'
+import { Sparkles, useTexture } from '@react-three/drei'
+import { VFXParticles, VFXEmitter } from 'lazy-vfx';
 
 
-const Scene = () => {
+
+const Scene = ({debug}) => {
+
+  const text = useTexture(
+    "https://static.thenounproject.com/png/4312916-200.png",
+  );
+
   return (
     <>
-    <VFXParticals
-        name="sparks"
-        settings={{ nParticals: 10000, intensity: 2, renderMode: "billboard", fadeAlpha:[0.5,0.5], fadeSize:[0,0], gravity: [0,-10,0]}}
-        // alphaMap={text}
-        geometry={<sphereGeometry/>}
-      />
-      <VFXEmitter
-        // ref={emitterRed}
-        nParticals={5000}
-        // debug
-        emitter="sparks"
+    
+      {/* Step 1: Define your particle system */}
+      <VFXParticles
+        name="sparks" // A unique identifier for this particle system
         settings={{
-          colorStart: ["#10B981", "#34D399"],
-          size: [0.1, 0.5],
-          startPositionMin: [0, 0, 0],
-          startPositionMax: [0, 0, 0],
+          nParticals: 10000, // Maximum number of particles to allocate
+          intensity: 2, // Brightness multiplier
+          renderMode: "billboard", // "billboard" or "mesh" or "stretchBillboard"
+          fadeAlpha: [0.5, 0.5], // Opacity fade in/out settings
+          fadeSize: [0, 0], // Size fade in/out settings
+          gravity: [0, -20, 0], // Apply gravity (x, y, z)
+        }}
+        alphaMap={text}
+        // geometry={<sphereGeometry />}
+      />
+
+      {/* Step 2: Define your emitter */}
+      <VFXEmitter
+      debug={debug}
+        // debug // Show debug visualization
+        emitter="sparks" // Target the particle system by name
+        settings={{
+          duration: 4,  // Emission cycle duration in seconds
+          delay: 0, // Time delay before starting emission
+          nbParticles: 10000, // Number of particles to emit per cycle
+          spawnMode: "time", // Emission mode: 'time' or 'burst'
+          loop: true, // Continuously emit particles (only if `spawnMode` is 'time')
+
+           // Position range (min/max)
+          startPositionMin: [0, 0.0, 0],
+          startPositionMax: [0, 0.0, 0],
+
+          // Rotation range (min/max)
+          startRotationMin: [0, 0, 0],
+          startRotationMax: [0, 0, 0],
+           // Rotation speed range (min/max)
+          rotationSpeedMin: [0, 0, 0],
+          rotationSpeedMax: [0, 0, 0],
+
+           // Particle lifetime range [min, max]
+          particlesLifetime: [0.1, 5],
+
+          // Particle speed range [min, max]
+          speed: [1, 10],
+
+          // Direction range (min/max)
           directionMin: [-0.5, 0, -0.5],
           directionMax: [0.5, 1, 0.5],
-          speed: [1, 5],
-          loop: true,
+ 
+          // Color at start - an array of strings for random selection
+          colorStart: ["#4ade80", "#4ade80"],
+
+           // Color at end - an array of strings for random selection
+          colorEnd: ["#4ade80", "#ffffff"],
+
+          // Particle size range [min, max]
+          size: [0.1, 0.5],
         }}
-        />
+      />
+
           {/* <Sparkles/> */}
         </>
   )
