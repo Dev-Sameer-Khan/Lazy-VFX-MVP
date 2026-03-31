@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { MoveUpRight, MoveRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/SplitText";
 
 const Navbar = () => {
   const [hover, setHover] = useState(false);
@@ -55,6 +57,75 @@ const Navbar = () => {
         { href: "#examples", label: "Examples", isLink: false }
       ];
 
+      const logoRef = useRef(null);
+
+      useGSAP(() => {
+
+        const tl = gsap.timeline()
+      
+        tl.fromTo(
+          ".logo",
+          {
+            yPercent: -50,
+            filter : "blur(5px)",
+            opacity : 0,
+          },
+          {
+            yPercent: 0,
+            filter : "blur(0px)",
+            opacity : 1,
+          }
+        );
+
+        tl.fromTo(
+          ".link",
+          {
+            yPercent: -50,
+            filter : "blur(5px)",
+            opacity : 0,
+          },
+          {
+            yPercent: 0,
+            filter : "blur(0px)",
+            opacity :1,
+            stagger: 0.03,
+          },"-=0.3"
+        );
+
+
+        tl.fromTo(
+          ".btn",
+          {
+            yPercent: -50,
+            filter : "blur(5px)",
+            opacity : 0,
+          },
+          {
+            yPercent: 0,
+            filter : "blur(0px)",
+            opacity : 1,
+            stagger: 0.03,
+          },"-=0.7"
+        );
+
+        tl.fromTo(
+          ".menu",
+          {
+            yPercent: -50,
+            filter : "blur(5px)",
+            opacity : 0,
+          },
+          {
+            yPercent: 0,
+            filter : "blur(0px)",
+            opacity : 1,
+            stagger: 0.03,
+          },"-=0.7"
+        );
+
+      }, []);
+
+
   return (
     <header
       ref={navRef}
@@ -73,23 +144,26 @@ const Navbar = () => {
           hubot-sans
         `}
       >
+        <div className="logo">
         <Link
+        ref={logoRef}
           to={{ pathname: "/" }}
           className={`
             text-2xl font-bold
             max-[599px]:text-lg
-            hubot-sans
+            hubot-sans 
           `}
         >
-          Lazy <span className="bg-gradient-to-br from-emerald-400 via-emerald-300 to-white 
+          <span></span>Lazy <span className="bg-gradient-to-br from-emerald-400 via-emerald-300 to-white 
                 bg-clip-text text-transparent italic font-normal">VFX</span>
         </Link>
+        </div>
         {/* Hamburger for mobile */}
         <button
           aria-label="Menu"
           className={`
             flex-col justify-center items-center hidden 
-            max-[599px]:flex ml-auto z-50
+            max-[599px]:flex ml-auto z-50 menu
           `}
           onClick={() => setOpen((o) => !o)}
         >
@@ -110,7 +184,7 @@ const Navbar = () => {
               <Link
                 key={item.label}
                 to={item.to}
-                className="relative font-medium transition-colors duration-300 hover:text-emerald-400 group"
+                className="relative font-medium transition-colors duration-300 hover:text-emerald-400 group link"
               >
                 {item.label}
                 <span
@@ -122,7 +196,7 @@ const Navbar = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="relative font-medium transition-colors duration-300 hover:text-emerald-400 group"
+                className="relative font-medium transition-colors duration-300 hover:text-emerald-400 group link"
               >
                 {item.label}
                 <span
@@ -143,7 +217,7 @@ const Navbar = () => {
               max-[1024px]:ml-4
               max-[599px]:hidden
               font-medium italic
-              
+              btn
             `}
             onPointerEnter={() => setHover(true)}
             onPointerLeave={() => setHover(false)}

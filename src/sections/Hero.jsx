@@ -1,8 +1,100 @@
 import React from "react";
 import Experience from "../components/3d/Experience";
 import Terminal from "../components/UI/Terminal";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
 
 const Hero = () => {
+
+
+  useGSAP(() => {
+
+    const tl = gsap.timeline()
+
+    const title = SplitText.create(".title", { type: "chars" });
+    const title1 = SplitText.create(".title1", { type: "chars" });
+  
+    
+    
+    tl.fromTo(
+      title1.chars,
+      {
+        yPercent: -50,
+        filter : "blur(5px)",
+        opacity : 0,
+      },
+      {
+        yPercent: 0,
+        filter : "blur(0px)",
+        opacity : 1,
+        stagger : 0.03,
+      },"a");
+
+      tl.fromTo(
+        title.chars,
+        {
+          yPercent: -50,
+          filter : "blur(5px)",
+          opacity : 0,
+        },
+        {
+          yPercent: 0,
+          filter : "blur(0px)",
+          opacity : 1,
+          stagger : 0.01,
+          duration : 0.3
+        },"-=0.7");
+
+      tl.fromTo(
+        ".btns",
+        {
+          yPercent: -50,
+          filter : "blur(5px)",
+          opacity : 0,
+        },
+        {
+          yPercent: 0,
+          filter : "blur(0px)",
+          opacity : 1,
+          stagger : 0.05,
+        },"-=0.5"
+      );
+
+      tl.fromTo(
+        ".terminal",
+        {
+          yPercent: -50,
+          filter : "blur(5px)",
+          opacity : 0,
+        },
+        {
+          yPercent: 0,
+          filter : "blur(0px)",
+          opacity : 1,
+          stagger : 0.05,
+        },"-=0.3"
+      );
+
+
+    tl.fromTo(
+      ".right",
+      {
+        xPercent: 100,
+        filter : "blur(5px)",
+        opacity : 0,
+      },
+      {
+        xPercent: 0,
+        filter : "blur(0px)",
+        opacity : 1,
+        // stagger : 0.01,
+      },">-0.5"
+    );
+
+
+  }, []);
+
   return (
     <section
       id="home"
@@ -26,20 +118,21 @@ const Hero = () => {
           `}
         >
           <div className="w-full max-[1024px]:text-center">
-            <h1
+           <h1
               className={`
                 text-[2.8rem] md:text-7xl font-extrabold tracking-tight 
                  drop-shadow-lg
                 max-[1024px]:text-5xl max-[599px]:text-[2rem]
-                hubot-sans
+                hubot-sans 
               `}
             >
-              Lazy <span className="italic font-normal bg-gradient-to-br from-emerald-400 via-emerald-300 to-white 
+              <span className="title1">Lazy</span> <span className="italic font-normal bg-gradient-to-br from-emerald-400 via-emerald-300 to-white 
                 bg-clip-text text-transparent">VFX</span>
             </h1>
+    
             <p
               className={`
-                my-4 text-lg text-white/60 leading-tight max-w-[75%]
+                my-4 text-lg text-white/60 leading-tight max-w-[75%] title
                 max-[1024px]:max-w-full max-[1024px]:mx-auto max-[599px]:my-2 max-[599px]:text-base
               `}
             >
@@ -49,7 +142,7 @@ const Hero = () => {
             <div
               className={`
                 flex items-center gap-2
-                max-[1024px]:justify-center max-[599px]:gap-1
+                max-[1024px]:justify-center max-[599px]:gap-1 btns
               `}
             >
               <span className="px-4 py-1 rounded-sm border border-white/30 text-white/80 font-semibold text-sm shadow-sm max-[599px]:px-2 max-[599px]:text-xs hubot-sans">
@@ -63,7 +156,7 @@ const Hero = () => {
               </span>
             </div>
           </div>
-          <div className="w-full max-[1024px]:flex max-[1024px]:justify-center">
+          <div className="w-full max-[1024px]:flex max-[1024px]:justify-center terminal">
             <Terminal title={"bash"} terminal copyText={"pnpm add lazy-vfx"} />
           </div>
         </div>
@@ -72,6 +165,7 @@ const Hero = () => {
         <div
           className={`
             md:w-1/2 w-full h-full max-[599px]:h-1/2
+            right
           `}
         >
           <Experience />

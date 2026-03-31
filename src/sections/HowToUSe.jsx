@@ -1,10 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Terminal from "../components/UI/Terminal";
 import { Copy, Check } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register gsap plugins
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const HowToUSe = () => {
   const [copied, setCopied] = useState(false);
+
+  // For GSAP reveal animation
+  const headingRef = useRef();
+  const descRef = useRef();
+  const cardRef = useRef();
+  const sectionRef = useRef();
+
+  useGSAP(() => {
+    // Split heading and desc
+    const splitDesc = SplitText.create(descRef.current, { type: "chars" });
+
+    // Animate both heading and desc, then the code block, on scroll into view
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 70%",   // Trigger when the section top reaches 70% of the viewport
+        toggleActions: "play none none reverse",
+        // markers: true,
+      },
+    })
+      .fromTo(
+        splitDesc.chars,
+        {
+          yPercent: -50,
+          filter: "blur(5px)",
+          opacity: 0,
+        },
+        {
+          yPercent: 0,
+          filter: "blur(0px)",
+          opacity: 1,
+          stagger: 0.01,
+          duration: 0.3,
+        },
+        "-=0.7" // Overlap like Hero.jsx
+      )
+      .fromTo(
+        cardRef.current,
+        {
+          xPercent: -20,
+          filter: "blur(5px)",
+          opacity: 0,
+        },
+        {
+          xPercent: 0,
+          filter: "blur(0px)",
+          opacity: 1,
+        },
+        "-=0.5"
+      );
+  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`import { VFXParticles, VFXEmitter } from "lazy-vfx";
@@ -64,6 +122,7 @@ function Experience() {
   return (
     <section
       id="use"
+      ref={sectionRef}
       className={`
         w-full min-h-screen flex items-center flex-col
         max-[1024px]:px-6
@@ -71,6 +130,7 @@ function Experience() {
       `}
     >
       <h2
+        ref={headingRef}
         className={`
           text-[2.8rem] md:text-7xl font-extrabold tracking-tight 
           bg-gradient-to-br from-emerald-400 via-emerald-300 to-white 
@@ -83,6 +143,7 @@ function Experience() {
         How to Use VFX
       </h2>
       <p
+        ref={descRef}
         className={`
           mb-8 text-center text-lg text-white/60 leading-tight max-w-3xl
           max-[1024px]:text-base max-[1024px]:mb-6 max-[1024px]:max-w-xl
@@ -116,6 +177,7 @@ function Experience() {
             `}
           >
             <div
+              ref={cardRef}
               className={`
                 relative z-10 backdrop-blur-sm border border-white/20 
                 rounded-xl overflow-hidden shadow-2xl
