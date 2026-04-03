@@ -1,25 +1,32 @@
 import React from 'react'
 // import VFXParticals from '../vfxs/VFXParticals'
 // import VFXEmitter from '../vfxs/VFXEmitter'
-import { Sparkles, useTexture } from '@react-three/drei'
+import { Sparkles, useGLTF, useTexture } from '@react-three/drei'
 import { VFXParticles, VFXEmitter } from 'lazy-vfx';
+import Ice from './Ice';
+import Fire from './Fire';
+import Void from './Void';
+import { selectedEffectAtom } from '../../main';
+import { useAtom } from 'jotai';
+import Default from './Default';
 
 
 
 const Scene = ({debug}) => {
 
-  const text = useTexture(
-    "https://static.thenounproject.com/png/4312916-200.png",
-  );
+
+  const texture = useTexture("/magic_01.png");
+  const text = useTexture("https://static.thenounproject.com/png/4312916-200.png");
+  const { nodes } = useGLTF("/Icicle.glb");
+
+  const [selectedEffect] = useAtom(selectedEffectAtom);
 
   return (
     <>
-    
-      {/* Step 1: Define your particle system */}
-      <VFXParticles
-        name="sparks" // A unique identifier for this particle system
+          <VFXParticles
+        name="default" // A unique identifier for this particle system
         settings={{
-          nParticals: 10000, // Maximum number of particles to allocate
+          nbParticles: 10000, // Maximum number of particles to allocate
           intensity: 2, // Brightness multiplier
           renderMode: "billboard", // "billboard" or "mesh" or "stretchBillboard"
           fadeAlpha: [0.5, 0.5], // Opacity fade in/out settings
@@ -30,50 +37,67 @@ const Scene = ({debug}) => {
         // geometry={<sphereGeometry />}
       />
 
-      {/* Step 2: Define your emitter */}
-      <VFXEmitter
-      debug={debug}
-        // debug // Show debug visualization
-        emitter="sparks" // Target the particle system by name
+    <VFXParticles
+    name="sparks"
+    geometry={<coneGeometry args={[0.5, 1, 8, 1]} />}
+    settings={{
+        nbParticles : 100000,
+        renderMode : "billboard",
+        intensity : 3,
+        fadeSize : [0.1,0.1]
+    }}
+    />
+    <VFXParticles
+        name="spheres"
+        geometry={<sphereGeometry args={[1, 32, 32]} />}
         settings={{
-          duration: 4,  // Emission cycle duration in seconds
-          delay: 0, // Time delay before starting emission
-          nbParticles: 10000, // Number of particles to emit per cycle
-          spawnMode: "time", // Emission mode: 'time' or 'burst'
-          loop: true, // Continuously emit particles (only if `spawnMode` is 'time')
-
-           // Position range (min/max)
-          startPositionMin: [0, 0.0, 0],
-          startPositionMax: [0, 0.0, 0],
-
-          // Rotation range (min/max)
-          startRotationMin: [0, 0, 0],
-          startRotationMax: [0, 0, 0],
-           // Rotation speed range (min/max)
-          rotationSpeedMin: [0, 0, 0],
-          rotationSpeedMax: [0, 0, 0],
-
-           // Particle lifetime range [min, max]
-          particlesLifetime: [0.1, 5],
-
-          // Particle speed range [min, max]
-          speed: [1, 10],
-
-          // Direction range (min/max)
-          directionMin: [-0.5, 0, -0.5],
-          directionMax: [0.5, 1, 0.5],
- 
-          // Color at start - an array of strings for random selection
-          colorStart: ["#4ade80", "#4ade80"],
-
-           // Color at end - an array of strings for random selection
-          colorEnd: ["#4ade80", "#ffffff"],
-
-          // Particle size range [min, max]
-          size: [0.1, 0.5],
+          nbParticles: 1000,
+          renderMode: "mesh",
+          intensity: 5,
+          fadeSize: [0.7, 0.9],
+          fadeAlpha: [0, 1],
+        }}
+      />
+       <VFXParticles
+        name="writings"
+        geometry={<circleGeometry args={[1, 32]} />}
+        alphaMap={texture}
+        settings={{
+          nbParticles: 100,
+          renderMode: "mesh",
+          fadeAlpha: [0.9, 1.0],
+          fadeSize: [0.3, 0.9],
+        }}
+      />
+      <VFXParticles
+        name="icicle"
+        geometry={<primitive object={nodes.icicle.geometry} />}
+        settings={{
+          nbParticles: 100,
+          renderMode: "mesh",
+          fadeAlpha: [0, 1.0],
+          fadeSize: [0.2, 0.8],
         }}
       />
 
+
+
+    {/* 
+      The code below checks the value of selectedEffectAtom, but selectedEffectAtom is an atom from jotai, 
+      not the value itself. You need to use the value from useAtom(selectedEffectAtom) so that you can access 
+      the currently selected effect!
+
+      For example, at the top of your component, you might have:
+      const [selectedEffect] = useAtom(selectedEffectAtom);
+
+      And then:
+    */}
+    {selectedEffect === "fire" && <Fire/> }
+    {selectedEffect === "ice" && <Ice/> }
+    {selectedEffect === "void" && <Void/> }
+    {selectedEffect === "default" && <Default/> }
+    {/* <Ice/> */}
+    
           {/* <Sparkles/> */}
         </>
   )

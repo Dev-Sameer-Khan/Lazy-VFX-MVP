@@ -6,6 +6,7 @@ import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Router from './routes/Router.jsx'
+import { atom } from 'jotai'
 
 const lenis = new Lenis();
 
@@ -16,6 +17,8 @@ gsap.ticker.add((time) => {
 });
 
 gsap.ticker.lagSmoothing(0);
+
+export const selectedEffectAtom = atom("default");
 
 
 createRoot(document.getElementById('root')).render(

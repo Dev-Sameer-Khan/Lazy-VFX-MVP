@@ -24,14 +24,15 @@ const HowToUSe = () => {
     const splitDesc = SplitText.create(descRef.current, { type: "chars" });
 
     // Animate both heading and desc, then the code block, on scroll into view
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 70%",   // Trigger when the section top reaches 70% of the viewport
-        toggleActions: "play none none reverse",
-        // markers: true,
-      },
-    })
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%", // Trigger when the section top reaches 70% of the viewport
+          toggleActions: "play none none reverse",
+          // markers: true,
+        },
+      })
       .fromTo(
         splitDesc.chars,
         {
@@ -45,8 +46,9 @@ const HowToUSe = () => {
           opacity: 1,
           stagger: 0.01,
           duration: 0.3,
+          willChange: "transform opacity filter",
         },
-        "-=0.7" // Overlap like Hero.jsx
+        "-=0.7", // Overlap like Hero.jsx
       )
       .fromTo(
         cardRef.current,
@@ -59,13 +61,15 @@ const HowToUSe = () => {
           xPercent: 0,
           filter: "blur(0px)",
           opacity: 1,
+          willChange: "transform opacity filter",
         },
-        "-=0.5"
+        "-=0.5",
       );
   }, []);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(`import { VFXParticles, VFXEmitter } from "lazy-vfx";
+    navigator.clipboard
+      .writeText(`import { VFXParticles, VFXEmitter } from "lazy-vfx";
 
 function Experience() {
   return (
@@ -197,7 +201,9 @@ function Experience() {
                   <div className="w-3 h-3 rounded-full bg-yellow-500 max-[599px]:w-2 max-[599px]:h-2" />
                   <div className="w-3 h-3 rounded-full bg-green-500 max-[599px]:w-2 max-[599px]:h-2" />
                 </div>
-                <div className="mx-auto text-xs font-mono text-white/40 max-[599px]:text-[10px]">scene.jsx</div>
+                <div className="mx-auto text-xs font-mono text-white/40 max-[599px]:text-[10px]">
+                  scene.jsx
+                </div>
               </div>
               <button
                 onClick={handleCopy}
@@ -209,9 +215,15 @@ function Experience() {
                 aria-label="Copy to clipboard"
               >
                 {copied ? (
-                  <Check size={18} className="text-green-400 max-[599px]:w-4 max-[599px]:h-4" />
+                  <Check
+                    size={18}
+                    className="text-green-400 max-[599px]:w-4 max-[599px]:h-4"
+                  />
                 ) : (
-                  <Copy size={18} className="text-white/60 max-[599px]:w-4 max-[599px]:h-4" />
+                  <Copy
+                    size={18}
+                    className="text-white/60 max-[599px]:w-4 max-[599px]:h-4"
+                  />
                 )}
               </button>
               <div className="p-0 md:p-2 max-[599px]:p-1 jetbrains-mono">

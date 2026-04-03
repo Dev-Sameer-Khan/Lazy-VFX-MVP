@@ -10,34 +10,38 @@ const examples = [
   {
     id: 1,
     title: "Physics & Collisions",
-    author: "JavaScript Driven",
+    author: "Procedural API",
     description:
-      "Visually simulate abstract worlds. Collide with energy and allow realistic soft bounces. All caused via the API: change alpha's energy cluster and it connects them. CPU isolated.",
-    tags: ["physics", "collisions", "features", "abstract"],
+      "Build abstract interactive worlds where energy bursts and particles bounce via physics-based interactions. Use the API to control energy, link clusters, and create CPU-isolated soft-body effects.",
+    tags: ["physics", "collisions", "interactive", "procedural"],
+    video: "/default.mp4"
   },
   {
     id: 2,
-    title: "Color Dynamics",
-    author: "API Demo",
+    title: "Flame Storm",
+    author: "Shader Animation",
     description:
-      "Show off rapid color changes and fade using random velocity and lifespan control. Explore chromatic chaos and clipping.",
-    tags: ["color", "dynamic", "random", "velocity"],
+      "Harness particle shaders to sculpt fire and smoke. Animate dense flames and scattering embers with API tweaks for velocity, turbulence, and decay. Push color into the furnace.",
+    tags: ["fire", "smoke", "shader", "animation"],
+    video: "/MultiGeo.mp4"
   },
   {
     id: 3,
-    title: "Color Dynamics",
-    author: "API Demo",
+    title: "Ice Shard Burst",
+    author: "Frozen Materials",
     description:
-      "Show off rapid color changes and fade using random velocity and lifespan control. Explore chromatic chaos and clipping.",
-    tags: ["color", "dynamic", "random", "velocity"],
+      "Morph dazzling ice crystals that burst and scatter — perfect for frozen spotlight effects. Control material reflectivity and fracture with per-particle attributes.",
+    tags: ["ice", "frozen", "materials", "refraction"],
+    video: "/customModel.mp4"
   },
   {
     id: 4,
-    title: "Color Dynamics",
-    author: "API Demo",
+    title: "Custom Geometry",
+    author: "API + Volume",
     description:
-      "Show off rapid color changes and fade using random velocity and lifespan control. Explore chromatic chaos and clipping.",
-    tags: ["color", "dynamic", "random", "velocity"],
+      "Flood your scene with volumetric light tunnels and rays. Animate color, fade, and direction to generate teleport, warp, or sci-fi spotlight effects on any geometry.",
+    tags: ["light", "ray", "volumetric", "visuals"],
+    video: "/customGeo.mp4"
   },
 ];
 
@@ -50,17 +54,20 @@ const Examples = () => {
   // GSAP animation for heading, desc, cards (on scroll into view)
   useGSAP(() => {
     // SplitText for heading and description
-    const splitHeading = SplitText.create(headingRef.current, { type: "chars" });
+    const splitHeading = SplitText.create(headingRef.current, {
+      type: "chars",
+    });
     const splitDesc = SplitText.create(descRef.current, { type: "chars" });
 
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 70%",
-        toggleActions: "play none none reverse",
-        // markers: true,
-      },
-    })
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+          toggleActions: "play none none reverse",
+          // markers: true,
+        },
+      })
       .fromTo(
         splitHeading.chars,
         {
@@ -74,7 +81,8 @@ const Examples = () => {
           opacity: 1,
           stagger: 0.02,
           duration: 0.3,
-        }
+          willChange: "transform opacity filter",
+        },
       )
       .fromTo(
         splitDesc.chars,
@@ -89,8 +97,9 @@ const Examples = () => {
           opacity: 1,
           stagger: 0.01,
           duration: 0.3,
+          willChange: "transform opacity filter",
         },
-        "-=0.6"
+        "-=0.6",
       )
       .fromTo(
         cardsRef.current,
@@ -105,8 +114,9 @@ const Examples = () => {
           opacity: 1,
           stagger: 0.18,
           duration: 0.6,
+          willChange: "transform opacity filter",
         },
-        "-=0.45"
+        "-=0.45",
       );
   }, []);
 
@@ -137,14 +147,16 @@ const Examples = () => {
         <div
           className="w-full flex flex-col relative"
           key={ex.id}
-          ref={el => (cardsRef.current[idx] = el)}
+          ref={(el) => (cardsRef.current[idx] = el)}
         >
           <div
             className={`w-full h-full flex items-center justify-between gap-20 pt-40 ${
               idx % 2 ? "flex-row-reverse" : "flex-row"
             }`}
           >
-            <div className="lefts w-1/2 h-[25rem] border border-white/20 rounded-xl"></div>
+            <div className="lefts w-1/2 h-[25rem] border border-white/20 rounded-xl">
+              <video loop muted autoPlay className="w-full h-full object-cover" src={ex.video}></video>
+            </div>
             <div className="rights w-1/2">
               <div className="w-full">
                 {/* Right: Example Details */}

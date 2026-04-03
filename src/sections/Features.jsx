@@ -20,14 +20,12 @@ const features = [
   {
     emoji: "⚡",
     title: "Performance Optimized",
-    description:
-      "Uses instanced rendering for efficient particle systems",
+    description: "Uses instanced rendering for efficient particle systems",
   },
   {
     emoji: "🔧",
     title: "TypeScript Support",
-    description:
-      "Full type definitions for better development experience",
+    description: "Full type definitions for better development experience",
   },
   {
     emoji: "🎮",
@@ -55,14 +53,15 @@ const Features = () => {
     // SplitText anim for description; reveal
     const splitDesc = SplitText.create(descRef.current, { type: "chars" });
 
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 70%",
-        toggleActions: "play none none reverse",
-        // markers: true,
-      },
-    })
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+          toggleActions: "play none none reverse",
+          // markers: true,
+        },
+      })
       .fromTo(
         splitDesc.chars,
         {
@@ -76,8 +75,9 @@ const Features = () => {
           opacity: 1,
           stagger: 0.01,
           duration: 0.3,
+          willChange: "transform opacity filter",
         },
-        "-=0.7"
+        "-=0.7",
       )
       .fromTo(
         gridRef.current,
@@ -90,8 +90,9 @@ const Features = () => {
           xPercent: 0,
           filter: "blur(0px)",
           opacity: 1,
+          willChange: "transform opacity filter",
         },
-        "-=0.7"
+        "-=0.7",
       );
   }, []);
 
@@ -108,7 +109,9 @@ const Features = () => {
         ref={descRef}
         className="mb-8 text-center text-lg text-white/60 leading-tight max-w-3xl"
       >
-        Effortlessly integrate high-performance, customizable particle effects into your React and Three.js applications with Lazy VFX. Get started quickly and unlock a new level of visual creativity.
+        Effortlessly integrate high-performance, customizable particle effects
+        into your React and Three.js applications with Lazy VFX. Get started
+        quickly and unlock a new level of visual creativity.
       </p>
       <div
         ref={gridRef}

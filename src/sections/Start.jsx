@@ -16,7 +16,9 @@ const Start = () => {
     // Split and animate the h1 (title)
     const titleSplit = SplitText.create(titleRef.current, { type: "chars" });
     // Animate subtitle separately (the "Today" span)
-    const subtitleSplit = SplitText.create(subtitleRef.current, { type: "chars" });
+    const subtitleSplit = SplitText.create(subtitleRef.current, {
+      type: "chars",
+    });
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -24,7 +26,7 @@ const Start = () => {
         start: "top 70%",
         toggleActions: "play none none reverse",
         // markers: true,
-      }
+      },
     });
 
     // "Today" subtitle comes first for nice effect
@@ -40,7 +42,8 @@ const Start = () => {
         filter: "blur(0px)",
         opacity: 1,
         stagger: 0.03,
-      }
+        willChange: "transform opacity filter",
+      },
     );
 
     tl.fromTo(
@@ -56,8 +59,9 @@ const Start = () => {
         opacity: 1,
         stagger: 0.01,
         duration: 0.3,
+        willChange: "transform opacity filter",
       },
-      "-=0.6"
+      "-=0.6",
     );
 
     tl.fromTo(
@@ -71,8 +75,9 @@ const Start = () => {
         yPercent: 0,
         filter: "blur(0px)",
         opacity: 1,
+        willChange: "transform opacity filter",
       },
-      "-=0.5"
+      "-=0.5",
     );
 
     tl.fromTo(
@@ -86,8 +91,9 @@ const Start = () => {
         yPercent: 0,
         filter: "blur(0px)",
         opacity: 1,
+        willChange: "transform opacity filter",
       },
-      "-=0.55"
+      "-=0.55",
     );
 
     tl.fromTo(
@@ -102,8 +108,9 @@ const Start = () => {
         filter: "blur(0px)",
         opacity: 1,
         duration: 0.5,
+        willChange: "transform opacity filter",
       },
-      "-=0.3"
+      "-=0.3",
     );
   }, []);
 
@@ -116,9 +123,7 @@ const Start = () => {
         className="relative hubot-sans z-10 text-[2.8rem] md:text-7xl font-extrabold tracking-tight leading-tight text-center mb-6"
         ref={titleRef}
       >
-        <span className="text-white drop-shadow-lg ">
-          Start building
-        </span>
+        <span className="text-white drop-shadow-lg ">Start building</span>
         <span
           className="text-emerald-500 font-semibold drop-shadow ml-2 italic"
           ref={subtitleRef}
@@ -131,10 +136,7 @@ const Start = () => {
         <Terminal title="bash" copyText="npm install lazy-vfx" terminal width />
       </div>
 
-      <div
-        className="flex gap-4 my-7 relative z-10 hubot-sans"
-        ref={btnsRef}
-      >
+      <div className="flex gap-4 my-7 relative z-10 hubot-sans" ref={btnsRef}>
         <a
           href="#features"
           className="px-7 hubot-sans py-3 bg-gradient-to-br from-white/5 to-white/0 border border-white/10 rounded-xl p-6 shadow-xl text-white/60 font-semibold hover:text-white transition-colors"
@@ -158,7 +160,10 @@ const Start = () => {
         <span className="mx-2 text-white/50 max-[599px]:hidden">|</span>
         <span className="text-white/30">
           Built for much more than a 3 liner.{" "}
-          <a href="https://github.com/zielak/vfx" className="text-emerald-500 hubot-sans">
+          <a
+            href="https://github.com/zielak/vfx"
+            className="text-emerald-500 hubot-sans"
+          >
             lazy-vfx
           </a>
         </span>

@@ -6,93 +6,97 @@ import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 
 const Hero = () => {
-
-
   useGSAP(() => {
-
-    const tl = gsap.timeline()
+    const tl = gsap.timeline();
 
     const title = SplitText.create(".title", { type: "chars" });
     const title1 = SplitText.create(".title1", { type: "chars" });
-  
-    
-    
+
     tl.fromTo(
       title1.chars,
       {
         yPercent: -50,
-        filter : "blur(5px)",
-        opacity : 0,
+        filter: "blur(5px)",
+        opacity: 0,
       },
       {
         yPercent: 0,
-        filter : "blur(0px)",
-        opacity : 1,
-        stagger : 0.03,
-      },"a");
+        filter: "blur(0px)",
+        opacity: 1,
+        stagger: 0.03,
+        willChange: "transform opacity filter",
+      },
+      "a",
+    );
 
-      tl.fromTo(
-        title.chars,
-        {
-          yPercent: -50,
-          filter : "blur(5px)",
-          opacity : 0,
-        },
-        {
-          yPercent: 0,
-          filter : "blur(0px)",
-          opacity : 1,
-          stagger : 0.01,
-          duration : 0.3
-        },"-=0.7");
+    tl.fromTo(
+      title.chars,
+      {
+        yPercent: -50,
+        filter: "blur(5px)",
+        opacity: 0,
+      },
+      {
+        yPercent: 0,
+        filter: "blur(0px)",
+        opacity: 1,
+        stagger: 0.01,
+        duration: 0.3,
+        willChange: "transform opacity filter",
+      },
+      "-=0.7",
+    );
 
-      tl.fromTo(
-        ".btns",
-        {
-          yPercent: -50,
-          filter : "blur(5px)",
-          opacity : 0,
-        },
-        {
-          yPercent: 0,
-          filter : "blur(0px)",
-          opacity : 1,
-          stagger : 0.05,
-        },"-=0.5"
-      );
+    tl.fromTo(
+      ".btns",
+      {
+        yPercent: -50,
+        filter: "blur(5px)",
+        opacity: 0,
+      },
+      {
+        yPercent: 0,
+        filter: "blur(0px)",
+        opacity: 1,
+        stagger: 0.05,
+        willChange: "transform opacity filter",
+      },
+      "-=0.5",
+    );
 
-      tl.fromTo(
-        ".terminal",
-        {
-          yPercent: -50,
-          filter : "blur(5px)",
-          opacity : 0,
-        },
-        {
-          yPercent: 0,
-          filter : "blur(0px)",
-          opacity : 1,
-          stagger : 0.05,
-        },"-=0.3"
-      );
-
+    tl.fromTo(
+      ".terminal",
+      {
+        yPercent: -50,
+        filter: "blur(5px)",
+        opacity: 0,
+      },
+      {
+        yPercent: 0,
+        filter: "blur(0px)",
+        opacity: 1,
+        stagger: 0.05,
+        willChange: "transform opacity filter",
+      },
+      "-=0.3",
+    );
 
     tl.fromTo(
       ".right",
       {
         xPercent: 100,
-        filter : "blur(5px)",
-        opacity : 0,
+        filter: "blur(5px)",
+        opacity: 0,
       },
       {
         xPercent: 0,
-        filter : "blur(0px)",
-        opacity : 1,
+        filter: "blur(0px)",
+        opacity: 1,
+        willChange: "transform opacity filter",
         // stagger : 0.01,
-      },">-0.5"
+      },
+      ">-0.5",
     );
-
-
   }, []);
 
   return (
@@ -118,7 +122,7 @@ const Hero = () => {
           `}
         >
           <div className="w-full max-[1024px]:text-center">
-           <h1
+            <h1
               className={`
                 text-[2.8rem] md:text-7xl font-extrabold tracking-tight 
                  drop-shadow-lg
@@ -126,10 +130,15 @@ const Hero = () => {
                 hubot-sans 
               `}
             >
-              <span className="title1">Lazy</span> <span className="italic font-normal bg-gradient-to-br from-emerald-400 via-emerald-300 to-white 
-                bg-clip-text text-transparent">VFX</span>
+              <span className="title1">Lazy</span>{" "}
+              <span
+                className="italic font-normal bg-gradient-to-br from-emerald-400 via-emerald-300 to-white 
+                bg-clip-text text-transparent"
+              >
+                VFX
+              </span>
             </h1>
-    
+
             <p
               className={`
                 my-4 text-lg text-white/60 leading-tight max-w-[75%] title
@@ -156,7 +165,7 @@ const Hero = () => {
               </span>
             </div>
           </div>
-          <div className="w-full max-[1024px]:flex max-[1024px]:justify-center terminal">
+          <div className="w-full max-[1024px]:flex max-[1024px]:justify-center terminal z-10">
             <Terminal title={"bash"} terminal copyText={"pnpm add lazy-vfx"} />
           </div>
         </div>
@@ -168,7 +177,8 @@ const Hero = () => {
             right
           `}
         >
-          <Experience />
+          {/* <Experience /> */}
+          <video src="/bg.mp4" autoPlay loop muted className="w-full h-full object-contain"></video>
         </div>
       </div>
     </section>
