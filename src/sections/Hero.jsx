@@ -110,7 +110,7 @@ const Hero = () => {
     >
       <div
         className={`
-          w-full h-full flex flex-col-reverse md:flex-row items-center justify-center gap-12 md:gap-0
+          w-full h-full flex flex-col-reverse md:flex-row items-center max-[599px]:justify-center max-[599px]:translate-y-40 justify-start gap-12 md:gap-0
           max-[1024px]:flex-col-reverse max-[1024px]:gap-6 max-[599px]:gap-0 max-[599px]:px-6
         `}
       >
@@ -168,17 +168,6 @@ const Hero = () => {
           <div className="w-full max-[1024px]:flex max-[1024px]:justify-center terminal z-10">
             <Terminal title={"bash"} terminal copyText={"pnpm add lazy-vfx"} />
           </div>
-        </div>
-
-        {/* Right section */}
-        <div
-          className={`
-            md:w-1/2 w-full h-full max-[599px]:h-1/2
-            right
-          `}
-        >
-          {/* <Experience /> */}
-          <video src="/bg.mp4" autoPlay loop muted className="w-full h-full object-contain"></video>
         </div>
       </div>
     </section>
